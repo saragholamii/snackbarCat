@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class CustomerMovement : MonoBehaviour
 {
     
-    [SerializeField] private GameObject tablePos;
+    private Vector3 tablePos;
     private NavMeshAgent agent;
 
     void Awake()
@@ -22,7 +22,12 @@ public class CustomerMovement : MonoBehaviour
 
     private void GoToTable()
     {
-        agent.SetDestination(new Vector3(tablePos.transform.position.x, tablePos.transform.position.y, transform.position.z));
+        agent.SetDestination(new Vector3(tablePos.x, tablePos.y, transform.position.z));
+    }
+
+    public void SetTablePos(Vector3 tablePos)
+    {
+        this.tablePos = tablePos;
     }
 
 }
