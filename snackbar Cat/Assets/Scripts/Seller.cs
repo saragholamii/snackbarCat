@@ -5,8 +5,8 @@ using UnityEngine;
 public class Seller : MonoBehaviour
 {
     [SerializeField] private float distanceFromTable = 6f;
-    [SerializeField] private float takingOrderTime = 3f;
-    [SerializeField] private float makingOrderTime = 6f;
+    [SerializeField] private float takingOrderTime = 2f;
+    [SerializeField] private float makingOrderTime = 4f;
     [SerializeField] private Transform kitchenTablePos;
     private List<Customer> customersList = new List<Customer>();
     private bool busy = false;
@@ -44,15 +44,13 @@ public class Seller : MonoBehaviour
     private void WaitForOrder()
     {
         takingOrder = true;
-        StartCoroutine(Wait(takingOrderTime));
-        sellerMovment.MoveTowards(kitchenTablePos.position);
+        StartCoroutine(WaitForOrderCoroutin(takingOrderTime));
     }
 
     private void MakeOrder()
     {
         makingOrder = true;
-        StartCoroutine(Wait(makingOrderTime));
-        sellerMovment.MoveTowards(customerPos);
+        StartCoroutine(WaitForMakeOrderCoroutin(makingOrderTime));
     }
 
     private void DeliverOrder()
@@ -64,9 +62,16 @@ public class Seller : MonoBehaviour
         deliveringOrder = false;
     }
 
-    private IEnumerator Wait(float sec)
+    private IEnumerator WaitForOrderCoroutin(float sec)
     {
         yield return new WaitForSeconds(sec);
+        sellerMovment.MoveTowards(kitchenTablePos.position);
+    }
+
+    private IEnumerator WaitForMakeOrderCoroutin(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        sellerMovment.MoveTowards(customerPos);
     }
 
     public void AddCustomer(Customer c)

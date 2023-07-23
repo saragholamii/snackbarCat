@@ -13,7 +13,7 @@ public class Core : MonoBehaviour
     private Datas datas;
     public delegate void NewCustomer(GameObject customer);
     public static NewCustomer newCustomer;
-    public delegate void ReleaseTable(GameObject table);
+    public delegate void ReleaseTable(GameObject table, GameObject coin);
     public static ReleaseTable releaseTable;
     
 
@@ -41,10 +41,12 @@ public class Core : MonoBehaviour
             GameObject table = datas.LocationOfEmptyTable();
             Vector3 locationOfTable = table.transform.position;
             GameObject customer =  Instantiate(customerPrefab, doorPos.position, Quaternion.identity);
+            GameObject[] order = datas.GetRandomOrderPrefab();
             customer.GetComponent<CustomerMovement>().SetTablePos(locationOfTable);
             customer.GetComponent<CustomerMovement>().SetDoorPos(doorPos.position);
             customer.GetComponent<Customer>().SetTable(table);
-            customer.GetComponent<Customer>().SetOrderPrefab(datas.GetRandomOrderPrefab());
+            customer.GetComponent<Customer>().SetOrderPrefab(order[0]);
+            customer.GetComponent<Customer>().SetCoin(order[1]);
         }
     }
 
@@ -54,8 +56,9 @@ public class Core : MonoBehaviour
         seller.GetComponent<Seller>().AddCustomer(customer.GetComponent<Customer>());
     }
 
-    private void Release_Table(GameObject table)
+    private void Release_Table(GameObject table, GameObject coin)
     {
+        Instantiate(coin, new Vector3(table.transform.position.x, table.transform.position.y - 1, table.transform.position.z), Quaternion.identity);
         table.GetComponent<Tables>().SetEmpty();
     }
 }

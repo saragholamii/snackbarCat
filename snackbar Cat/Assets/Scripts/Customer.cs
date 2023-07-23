@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     private GameObject orderPrefab;
+    private GameObject orderCoin;
     private Vector3 tablePos;
     private GameObject table;
     GameObject Order;
@@ -43,6 +44,11 @@ public class Customer : MonoBehaviour
         this.orderPrefab = orderPrefab;
     }
 
+    public void SetCoin(GameObject orderCoin)
+    {
+        this.orderCoin = orderCoin;
+    }
+
     public void SetTable(GameObject table)
     {
         this.table = table;
@@ -51,7 +57,7 @@ public class Customer : MonoBehaviour
     public void OrderDelivered()
     {
         Destroy(Order);
-        Core.releaseTable(table);
+        Core.releaseTable(table, orderCoin);
         customerMovement.Exit();
     }
 }
