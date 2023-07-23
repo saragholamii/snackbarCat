@@ -10,7 +10,7 @@ public class Datas : MonoBehaviour
     [SerializeField] private List<GameObject> orderPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> orderWithPlatePrefab = new List<GameObject>();
     [SerializeField] private List<GameObject> coins = new List<GameObject>();
-    private int score = 0;
+    private static int score = 0;
     private int nextSeller = 0;
 
 
@@ -54,8 +54,8 @@ public class Datas : MonoBehaviour
         score += amount;
     }
 
-    public int GetScore()
+    public string GetScore()
     {
-        return score;
+        return score.ToString();
     }
 }

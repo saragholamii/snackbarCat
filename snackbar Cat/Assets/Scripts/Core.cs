@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Core : MonoBehaviour
 {
@@ -10,18 +12,23 @@ public class Core : MonoBehaviour
     [SerializeField]    private float instantiationTime = 2f;
     [SerializeField]    private Transform doorPos;
     [SerializeField]    private GameObject customerPrefab;
+    [SerializeField]    private TextMeshProUGUI scoreText;
     private Datas datas;
     public delegate void NewCustomer(GameObject customer);
     public static NewCustomer newCustomer;
     public delegate void ReleaseTable(GameObject table, GameObject coin);
     public static ReleaseTable releaseTable;
+    public delegate void IncreaseScore(int amount);
+    public static IncreaseScore increaseScore;
     
 
     void Start() 
     {
         datas = GetComponent<Datas>();
+        scoreText.text = datas.GetScore();
         newCustomer += AddCustomerToSellerList;
         releaseTable += Release_Table;
+        increaseScore += Increase_Score;
     }
 
     void Update()
@@ -60,5 +67,11 @@ public class Core : MonoBehaviour
     {
         Instantiate(coin, new Vector3(table.transform.position.x, table.transform.position.y - 1, table.transform.position.z), Quaternion.identity);
         table.GetComponent<Tables>().SetEmpty();
+    }
+
+    private void Increase_Score(int amount)
+    {
+        datas.IncreaseScore(amount);
+        scoreText.text = datas.GetScore();
     }
 }
