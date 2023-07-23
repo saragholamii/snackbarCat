@@ -34,6 +34,7 @@ public class Core : MonoBehaviour
             Vector3 locationOfTable = datas.LocationOfEmptyTable();
             GameObject customer =  Instantiate(customerPrefab, customerInstatiatePos.position, Quaternion.identity);
             customer.GetComponent<CustomerMovement>().SetTablePos(locationOfTable);
+            customer.GetComponent<Customer>().SetOrderPrefab(datas.GetRandomOrderPrefab());
         }
     }
 }
