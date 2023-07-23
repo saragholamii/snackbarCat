@@ -7,33 +7,33 @@ public class Customer : MonoBehaviour
 {
     private GameObject orderPrefab;
     private Vector3 tablePos;
+    private GameObject table;
     GameObject Order;
-    private bool orderCreated1 = false;
-    private bool orderCreated2 = false;
+    private bool orderCreated = false;
     private Rigidbody2D rb;
     private NavMeshAgent agent;
+    private CustomerMovement customerMovement;
 
     void Start()
     {
-        tablePos = GetComponent<CustomerMovement>().GetTablePos();
+        customerMovement = GetComponent<CustomerMovement>();
+        tablePos = customerMovement.GetTablePos();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody2D>();
-        //transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-        Debug.Log("table pos: " + tablePos);
     }
 
     void Update()
     {
-        if(Vector3.Distance(transform.position, tablePos) < 1.5f && !orderCreated1)
+        if(Vector3.Distance(transform.position, tablePos) < 1.5f && !orderCreated)
         {
             CreateOrder();
-            orderCreated1 = true;
+            Core.newCustomer(this.gameObject);
+            orderCreated = true;
         }
     }
 
     public void CreateOrder()
     {
-        Debug.Log("inside create Order");
         Vector3 OrderPos = transform.GetChild(0).position;
         Order = Instantiate(orderPrefab, OrderPos, Quaternion.identity);
     }
@@ -43,8 +43,15 @@ public class Customer : MonoBehaviour
         this.orderPrefab = orderPrefab;
     }
 
+    public void SetTable(GameObject table)
+    {
+        this.table = table;
+    }
+
     public void OrderDelivered()
     {
         Destroy(Order);
+        Core.releaseTable(table);
+        customerMovement.Exit();
     }
 }
