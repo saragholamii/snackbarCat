@@ -85,7 +85,7 @@ public class Upgrades : MonoBehaviour
             level10 = true;
         }    
 
-        if(level >= 5 && score >= 200 && !helpLevel)    
+        if(level >= 2 && score >= 200 && !helpLevel)    
         {
             UpgradeHelp();
             helpLevel = true;

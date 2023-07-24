@@ -15,6 +15,9 @@ public class Core : MonoBehaviour
     [SerializeField]    private TextMeshProUGUI scoreText;
     [SerializeField]    private TextMeshProUGUI levelText;
     [SerializeField]    private TextMeshProUGUI PriceText;
+    [SerializeField]    private GameObject sellerPrefab;
+    [SerializeField]    private Transform sellerPos;
+    [SerializeField]    private GameObject helpPrefab;
     private Datas datas;
     public delegate void NewCustomer(GameObject customer);
     public static NewCustomer newCustomer;
@@ -26,7 +29,8 @@ public class Core : MonoBehaviour
     public static UpdateNumbers updateScore;
     public static UpdateNumbers updateLevel;
     public static UpdateNumbers updatePrice;
-
+    public delegate void NewSeller(Vector3 instantiationPos, int sellerNum);
+    public static NewSeller newSeller;
     
 
     void Start() 
@@ -39,6 +43,10 @@ public class Core : MonoBehaviour
         updateScore += Update_Score;
         updateLevel += Update_Level;
         updatePrice += Update_Price;
+        newSeller += New_Seller;
+
+        //create seller
+        New_Seller(sellerPos.position, 0);
     }
 
     void Update()
@@ -98,5 +106,16 @@ public class Core : MonoBehaviour
     private void Update_Price(int newPrice)
     {
         PriceText.text = "price: " + newPrice.ToString();
+    }
+
+    private void New_Seller(Vector3 instantiationPos, int sellerNum)
+    {
+        GameObject newSeller;
+
+        if(sellerNum == 0)      newSeller = Instantiate(sellerPrefab, instantiationPos, Quaternion.identity);
+        else                    newSeller = Instantiate(helpPrefab, instantiationPos, Quaternion.identity);
+            
+        newSeller.GetComponent<Seller>().SetKitchenTablePos(datas.GetKitchenTablePos(sellerNum));
+        datas.AddNewSeller(newSeller);
     }
 }

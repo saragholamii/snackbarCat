@@ -6,10 +6,11 @@ public class Datas : MonoBehaviour
 {
 
     [SerializeField] private GameObject[] tables;
-    [SerializeField] private List<GameObject> sellers = new List<GameObject>();
     [SerializeField] private List<GameObject> orderPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> orderWithPlatePrefab = new List<GameObject>();
     [SerializeField] private List<GameObject> coins = new List<GameObject>();
+    [SerializeField] private List<GameObject> kitchenTables = new List<GameObject>();
+    private List<GameObject> sellers = new List<GameObject>();
     private static int score = 0;
     private static int price = 1;
     private static int level = 1;
@@ -51,6 +52,11 @@ public class Datas : MonoBehaviour
         orderPrefabs.Add(newOrderPrefab);
     }
 
+    public void AddNewSeller(GameObject newSeller)
+    {
+        sellers.Add(newSeller);
+    }
+
     public static void IncreaseScore(int amount)
     {
         score += amount;
@@ -89,5 +95,10 @@ public class Datas : MonoBehaviour
     {
         level = newLevel;
         Core.updateLevel(level);
+    }
+
+    public Vector3 GetKitchenTablePos(int sellerNum)
+    {
+        return kitchenTables[sellerNum].transform.position;
     }
 }
