@@ -7,7 +7,7 @@ public class Seller : MonoBehaviour
     [SerializeField] private float distanceFromTable = 6f;
     [SerializeField] private float takingOrderTime = 2f;
     [SerializeField] private float makingOrderTime = 4f;
-    [SerializeField] private Transform kitchenTablePos;
+    private Vector3 kitchenTablePos;
     private List<Customer> customersList = new List<Customer>();
     private bool busy = false;
     private bool takingOrder = false;
@@ -28,7 +28,7 @@ public class Seller : MonoBehaviour
     {
         if(customersList.Count != 0 && !busy)           TakeOrder();
         if(Vector3.Distance(transform.position, customerPos) <= 1.5 && busy && !takingOrder)         WaitForOrder();
-        if(Vector3.Distance(transform.position, kitchenTablePos.position) <= 1.5f && busy && takingOrder && !makingOrder)        MakeOrder();
+        if(Vector3.Distance(transform.position, kitchenTablePos) <= 1.5f && busy && takingOrder && !makingOrder)        MakeOrder();
         if(Vector3.Distance(transform.position, customerPos) <= 1.5 && busy && takingOrder && makingOrder && !deliveringOrder)          DeliverOrder();
     }
 
@@ -65,7 +65,7 @@ public class Seller : MonoBehaviour
     private IEnumerator WaitForOrderCoroutin(float sec)
     {
         yield return new WaitForSeconds(sec);
-        sellerMovment.MoveTowards(kitchenTablePos.position);
+        sellerMovment.MoveTowards(kitchenTablePos);
     }
 
     private IEnumerator WaitForMakeOrderCoroutin(float sec)
@@ -83,4 +83,10 @@ public class Seller : MonoBehaviour
     {
         customerOrderWithPlatePrefab = orderPrefab;
     }
+
+    public void SetKitchenTablePos(Vector3 pos)
+    {
+        kitchenTablePos = pos;
+    }
+
 }

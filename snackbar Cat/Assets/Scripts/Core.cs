@@ -13,6 +13,8 @@ public class Core : MonoBehaviour
     [SerializeField]    private Transform doorPos;
     [SerializeField]    private GameObject customerPrefab;
     [SerializeField]    private TextMeshProUGUI scoreText;
+    [SerializeField]    private TextMeshProUGUI levelText;
+    [SerializeField]    private TextMeshProUGUI PriceText;
     private Datas datas;
     public delegate void NewCustomer(GameObject customer);
     public static NewCustomer newCustomer;
@@ -20,15 +22,23 @@ public class Core : MonoBehaviour
     public static ReleaseTable releaseTable;
     public delegate void IncreaseScore(int amount);
     public static IncreaseScore increaseScore;
+    public delegate void UpdateNumbers(int amount);
+    public static UpdateNumbers updateScore;
+    public static UpdateNumbers updateLevel;
+    public static UpdateNumbers updatePrice;
+
     
 
     void Start() 
     {
         datas = GetComponent<Datas>();
-        scoreText.text = datas.GetScore();
+        scoreText.text = Datas.GetScore().ToString();
         newCustomer += AddCustomerToSellerList;
         releaseTable += Release_Table;
         increaseScore += Increase_Score;
+        updateScore += Update_Score;
+        updateLevel += Update_Level;
+        updatePrice += Update_Price;
     }
 
     void Update()
@@ -71,7 +81,22 @@ public class Core : MonoBehaviour
 
     private void Increase_Score(int amount)
     {
-        datas.IncreaseScore(amount);
-        scoreText.text = datas.GetScore();
+        Datas.IncreaseScore(amount);
+        scoreText.text = Datas.GetScore().ToString();
+    }
+
+    private void Update_Score(int newScore)
+    {
+        scoreText.text = newScore.ToString();
+    }
+
+    private void Update_Level(int newLevel)
+    {
+        levelText.text = "level" + newLevel.ToString();
+    }
+
+    private void Update_Price(int newPrice)
+    {
+        PriceText.text = "price: " + newPrice.ToString();
     }
 }

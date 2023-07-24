@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
     private IEnumerator DestroyCoin()
     {
         yield return new WaitForSeconds(coinDestroyTime);
-        Core.increaseScore(coinValue);
+        Core.increaseScore(Datas.GetPrice());
         Destroy(this.gameObject);
     }
 }

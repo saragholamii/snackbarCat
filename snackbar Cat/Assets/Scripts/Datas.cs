@@ -11,6 +11,8 @@ public class Datas : MonoBehaviour
     [SerializeField] private List<GameObject> orderWithPlatePrefab = new List<GameObject>();
     [SerializeField] private List<GameObject> coins = new List<GameObject>();
     private static int score = 0;
+    private static int price = 1;
+    private static int level = 1;
     private int nextSeller = 0;
 
 
@@ -49,13 +51,43 @@ public class Datas : MonoBehaviour
         orderPrefabs.Add(newOrderPrefab);
     }
 
-    public void IncreaseScore(int amount)
+    public static void IncreaseScore(int amount)
     {
         score += amount;
+        Core.updateScore(score);
     }
 
-    public string GetScore()
+    public static void DecreaseScore(int amount)
     {
-        return score.ToString();
+        score -= amount;
+        Core.updateScore(score);
+    }
+
+    public static int GetScore()
+    {
+        return score;
+    }
+
+    public static void SetNewPrice(int newPrice)
+    {
+        price = newPrice;
+        Core.updatePrice(price);
+    }
+
+    public static int GetPrice()
+    {
+        Debug.Log("price: " + price);
+        return price;
+    }
+
+    public static int GetLevel()
+    {
+        return level;
+    }
+
+    public static void SetLevel(int newLevel)
+    {
+        level = newLevel;
+        Core.updateLevel(level);
     }
 }
