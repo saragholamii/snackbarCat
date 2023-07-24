@@ -18,6 +18,7 @@ public class Core : MonoBehaviour
     [SerializeField]    private GameObject sellerPrefab;
     [SerializeField]    private Transform sellerPos;
     [SerializeField]    private GameObject helpPrefab;
+    [SerializeField]    private GameObject coinPrefab;
     private Datas datas;
     public delegate void NewCustomer(GameObject customer);
     public static NewCustomer newCustomer;
@@ -66,12 +67,13 @@ public class Core : MonoBehaviour
             GameObject table = datas.LocationOfEmptyTable();
             Vector3 locationOfTable = table.transform.position;
             GameObject customer =  Instantiate(customerPrefab, doorPos.position, Quaternion.identity);
-            GameObject[] order = datas.GetRandomOrderPrefab();
+            GameObject order = datas.GetRandomOrderPrefab();
             customer.GetComponent<CustomerMovement>().SetTablePos(locationOfTable);
             customer.GetComponent<CustomerMovement>().SetDoorPos(doorPos.position);
             customer.GetComponent<Customer>().SetTable(table);
-            customer.GetComponent<Customer>().SetOrderPrefab(order[0]);
-            customer.GetComponent<Customer>().SetCoin(order[1]);
+            customer.GetComponent<Customer>().SetOrderPrefab(order);
+            customer.GetComponent<Customer>().SetCoin(coinPrefab);
+           
         }
     }
 

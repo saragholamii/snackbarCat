@@ -8,7 +8,6 @@ public class Datas : MonoBehaviour
     [SerializeField] private GameObject[] tables;
     [SerializeField] private List<GameObject> orderPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> orderWithPlatePrefab = new List<GameObject>();
-    [SerializeField] private List<GameObject> coins = new List<GameObject>();
     [SerializeField] private List<GameObject> kitchenTables = new List<GameObject>();
     private List<GameObject> sellers = new List<GameObject>();
     private static int score = 0;
@@ -37,13 +36,15 @@ public class Datas : MonoBehaviour
 
     public GameObject GetSeller()
     {
-        return (sellers[(nextSeller++ % sellers.Count)]);
+        if(sellers.Count == 1)                                                                                                   return sellers[0];
+        else if(sellers[0].GetComponent<Seller>().GetCustomerNum() >= sellers[1].GetComponent<Seller>().GetCustomerNum())        return sellers[1];
+        else                                                                                                                     return sellers[0];
     }
 
-    public GameObject[] GetRandomOrderPrefab()
+    public GameObject GetRandomOrderPrefab()
     {
         int index = Random.Range(0, orderPrefabs.Count - 1);
-        GameObject[] order = {orderPrefabs[index], coins[index]};
+        GameObject order = orderPrefabs[index];
         return order;
     }
 

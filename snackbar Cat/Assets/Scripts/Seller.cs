@@ -89,4 +89,9 @@ public class Seller : MonoBehaviour
         kitchenTablePos = pos;
     }
 
+    public int GetCustomerNum()
+    {
+        return customersList.Count;
+    }
+
 }
