@@ -2,23 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SellerMovmentAnimation : MonoBehaviour
+public class HelpMovementAnimation : MonoBehaviour
 {
-
+    
+    
     Animator animator;
     private string currentState;
     private Vector3 currentPosition;
     private Vector3 previousPosition;
-    
-
 
     //animation states:
-    const string IDLE = "Seller_Idle";
-    const string UP = "Seller_RunBackward";
-    const string DOWN = "Seller_RunForward";
-    const string LEFT = "Seller_RunLeft";
-    const string RIGHT = "Seller_RunRight";
-
+    const string IDLE = "Help_Idle";
+    const string UP = "Help_Backward";
+    const string DOWN = "Help_Forward";
 
     void Start()
     {
@@ -26,7 +22,7 @@ public class SellerMovmentAnimation : MonoBehaviour
         animator.Play(IDLE);
     }
 
-
+    
     void Update()
     {
         currentPosition = transform.position;
@@ -36,7 +32,6 @@ public class SellerMovmentAnimation : MonoBehaviour
         else                                                                    ChangeAnimationState(UP);
         previousPosition = currentPosition;
     }
-
 
     private void ChangeAnimationState(string newState)
     {

@@ -10071,7 +10071,7 @@ MonoBehaviour:
   PriceText: {fileID: 1675235085}
   sellerPrefab: {fileID: 5952759442718534584, guid: 7576898391f091c49a77d0cdd8a36f2c, type: 3}
   sellerPos: {fileID: 1190749748}
-  helpPrefab: {fileID: 767717117674519536, guid: dafea79b7e04d9742b98cc56942a7223, type: 3}
+  helpPrefab: {fileID: 2968546793324781674, guid: 0d3b937e6de5d5b42aedbfff797e718f, type: 3}
   helpPos: {fileID: 417589477}
   coinPrefab: {fileID: 2650750418237722762, guid: 21901d2a98a586b4c8395a3223e1dfef, type: 3}
   upgradeMessage: {fileID: 486176030}
