@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1516437057243479195}
+  - component: {fileID: 7748967100965270874}
   - component: {fileID: 1372979867829314974}
   - component: {fileID: 2076301728070637440}
   - component: {fileID: -7812657109201865423}
+  - component: {fileID: 4667815432780222555}
   m_Layer: 0
   m_Name: upgradeButton
   m_TagString: Untagged
@@ -19,21 +20,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1516437057243479195
-Transform:
+--- !u!224 &7748967100965270874
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2428972777814984578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.51, y: 0.44, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -13.51, y: 0.44}
+  m_SizeDelta: {x: 1.6666666, y: 1.6666666}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1372979867829314974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c86fc013900646bd95ed81877aef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeImageGameObject: {fileID: 0}
 --- !u!61 &-7812657109201865423
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,3 +131,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6666666, y: 1.6666666}
   m_EdgeRadius: 0
+--- !u!222 &4667815432780222555
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428972777814984578}
+  m_CullTransparentMesh: 1

@@ -18,7 +18,13 @@ public class Core : MonoBehaviour
     [SerializeField]    private GameObject sellerPrefab;
     [SerializeField]    private Transform sellerPos;
     [SerializeField]    private GameObject helpPrefab;
+    [SerializeField]    private Transform helpPos;
     [SerializeField]    private GameObject coinPrefab;
+    [SerializeField]    private GameObject upgradeMessage;
+    [SerializeField]    private TextMeshProUGUI upgradeMessageText;
+    [SerializeField]    private GameObject babyUpgradeButton;
+    [SerializeField]    private GameObject helpMessage;
+    [SerializeField]    private TextMeshProUGUI helpupgradeMessageText;
     private Datas datas;
     public delegate void NewCustomer(GameObject customer);
     public static NewCustomer newCustomer;
@@ -30,8 +36,16 @@ public class Core : MonoBehaviour
     public static UpdateNumbers updateScore;
     public static UpdateNumbers updateLevel;
     public static UpdateNumbers updatePrice;
-    public delegate void NewSeller(Vector3 instantiationPos, int sellerNum);
+    public delegate void NewSeller(int sellerNum);
     public static NewSeller newSeller;
+    public delegate void UpgradeMessage(string message);
+    public static UpgradeMessage showUpgradeMessage;
+    public static UpgradeMessage showHelpUpgradeMessage;
+    public delegate void Upgrade();
+    public static Upgrade hideUpgradeMessage;
+    public static Upgrade hideHelpUpgradeMessage;
+    public static Upgrade showBabyUpgradeButton;
+    public static Upgrade hideBabyUpgradeButton;
     
 
     void Start() 
@@ -45,9 +59,15 @@ public class Core : MonoBehaviour
         updateLevel += Update_Level;
         updatePrice += Update_Price;
         newSeller += New_Seller;
+        showUpgradeMessage += Show_UpgradeMessage;
+        hideUpgradeMessage += Hide_UpgradeMessage;
+        showBabyUpgradeButton += Show_BabyUpgradeButton;
+        hideBabyUpgradeButton += Hide_BabyUpgradeButton;
+        showHelpUpgradeMessage += Show_HelpUpgradeMessage;
+        hideHelpUpgradeMessage += Hide_HelpUpgradeMessage;
 
         //create seller
-        New_Seller(sellerPos.position, 0);
+        New_Seller(0);
     }
 
     void Update()
@@ -110,14 +130,47 @@ public class Core : MonoBehaviour
         PriceText.text = "price: " + newPrice.ToString();
     }
 
-    private void New_Seller(Vector3 instantiationPos, int sellerNum)
+    private void New_Seller(int sellerNum)
     {
         GameObject newSeller;
 
-        if(sellerNum == 0)      newSeller = Instantiate(sellerPrefab, instantiationPos, Quaternion.identity);
-        else                    newSeller = Instantiate(helpPrefab, instantiationPos, Quaternion.identity);
+        if(sellerNum == 0)      newSeller = Instantiate(sellerPrefab, sellerPos.position, Quaternion.identity);
+        else                    newSeller = Instantiate(helpPrefab, helpPos.position, Quaternion.identity);
             
         newSeller.GetComponent<Seller>().SetKitchenTablePos(datas.GetKitchenTablePos(sellerNum));
         datas.AddNewSeller(newSeller);
     }
+
+    private void Show_UpgradeMessage(string message)
+    {
+        upgradeMessageText.text = message;
+        upgradeMessage.SetActive(true);
+    }
+
+    private void Hide_UpgradeMessage()
+    {
+        upgradeMessage.SetActive(false);
+    }
+
+    private void Show_BabyUpgradeButton()
+    {
+        babyUpgradeButton.SetActive(true);
+    }
+
+    private void Hide_BabyUpgradeButton()
+    {
+        babyUpgradeButton.SetActive(false);
+    }
+
+    private void Show_HelpUpgradeMessage(string message)
+    {
+       helpupgradeMessageText.text = message;
+       helpMessage.SetActive(true);
+    }
+
+    private void Hide_HelpUpgradeMessage()
+    {
+        helpMessage.SetActive(false);
+    }
+
 }

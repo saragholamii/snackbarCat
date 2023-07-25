@@ -1,70 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
-    private void OnMouseDown() 
+
+    private void OnMouseEnter() 
     {
+        string message = "";
         switch(Datas.GetLevel())
         {
             case 1:
-                Datas.SetNewPrice(2);
-                Datas.DecreaseScore(5);
-                Datas.SetLevel(2);
+                message = " cost: 5 - price: 2";
                 break;
-            
             case 2:
-                Datas.SetNewPrice(3);
-                Datas.DecreaseScore(7);
-                Datas.SetLevel(3);
+                message = " cost: 7 - price: 3";
                 break;
-
             case 3:
-                Datas.SetNewPrice(5);
-                Datas.DecreaseScore(10);
-                Datas.SetLevel(4);
+                message = " cost: 10 - price: 5";
                 break;
-            
             case 4:
-                Datas.SetNewPrice(10);
-                Datas.DecreaseScore(30);
-                Datas.SetLevel(5);
-                Upgrades.createCoffeeMaker();
+                message = " cost: 30 - price: 10 and a new cattle";
                 break;
-
             case 5:
-                Datas.SetNewPrice(12);
-                Datas.DecreaseScore(35);
-                Datas.SetLevel(6);
+                message = " cost: 35 - price: 12";
                 break;
-
             case 6:
-                Datas.SetNewPrice(15);
-                Datas.DecreaseScore(40);
-                Datas.SetLevel(7);
+                message = " cost: 40 - price: 15";
                 break;
-
             case 7:
-                Datas.SetNewPrice(17);
-                Datas.DecreaseScore(45);
-                Datas.SetLevel(8);
+                message = " cost: 45 - price: 17";
                 break;
-
             case 8:
-                Datas.SetNewPrice(20);
-                Datas.DecreaseScore(50);
-                Datas.SetLevel(9);
+                message = " cost: 50 - price: 20";
                 break;
-
             case 9:
-                Datas.SetNewPrice(30);
-                Datas.DecreaseScore(125);
-                Datas.SetLevel(10);
+                message = " cost: 30 - price: 125";
                 break;
-
         }
 
+        Core.showUpgradeMessage(message);
         Destroy(this.gameObject);
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HelpBox : MonoBehaviour
 {
-    private void OnMouseDown() 
+    private void OnMouseEnter() 
     {
-        Core.newSeller(this.gameObject.transform.position, 1);
+        Core.showHelpUpgradeMessage("cost: 200 - you will get a help");
         Destroy(this.gameObject);
     }
 }
