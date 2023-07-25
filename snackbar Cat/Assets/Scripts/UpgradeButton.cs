@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UpgradeButton : MonoBehaviour
 {
 
-    private void OnMouseEnter() 
+    private void OnMouseUp() 
     {
         string message = "";
         switch(Datas.GetLevel())
