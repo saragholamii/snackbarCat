@@ -7,11 +7,13 @@ public class Coin : MonoBehaviour
     
     [SerializeField] private int coinDestroyTime = 2;
     [SerializeField] private int coinValue = 1;
-    private Animation animation;
+    Animator animator;
+    const string IDLE = "coinAnimation";
+
     void Start()
     {
-        animation = GetComponent<Animation>();
-        animation.Play();
+        animator = GetComponent<Animator>();
+        animator.Play(IDLE);
         StartCoroutine(DestroyCoin());
     }
 

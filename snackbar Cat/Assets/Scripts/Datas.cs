@@ -9,6 +9,7 @@ public class Datas : MonoBehaviour
     [SerializeField] private List<GameObject> orderPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> orderWithPlatePrefab = new List<GameObject>();
     [SerializeField] private List<GameObject> kitchenTables = new List<GameObject>();
+    [SerializeField] private List<GameObject> customersPrefab = new List<GameObject>();
     private List<GameObject> sellers = new List<GameObject>();
     private static int score = 0;
     private static int price = 1;
@@ -101,5 +102,10 @@ public class Datas : MonoBehaviour
     public Vector3 GetKitchenTablePos(int sellerNum)
     {
         return kitchenTables[sellerNum].transform.position;
+    }
+
+    public GameObject GetRandomCustomerPrefab()
+    {
+        return customersPrefab[Random.Range(0, customersPrefab.Count)];
     }
 }

@@ -10,8 +10,8 @@ public class Core : MonoBehaviour
 
     private float passedTime = 0f;
     [SerializeField]    private float instantiationTime = 2f;
-    [SerializeField]    private Transform doorPos;
-    [SerializeField]    private GameObject customerPrefab;
+    [SerializeField]    private Transform entryDoor;
+    [SerializeField]    private Transform exitDoor;
     [SerializeField]    private TextMeshProUGUI scoreText;
     [SerializeField]    private TextMeshProUGUI levelText;
     [SerializeField]    private TextMeshProUGUI PriceText;
@@ -86,10 +86,10 @@ public class Core : MonoBehaviour
         {
             GameObject table = datas.LocationOfEmptyTable();
             Vector3 locationOfTable = table.transform.position;
-            GameObject customer =  Instantiate(customerPrefab, doorPos.position, Quaternion.identity);
+            GameObject customer =  Instantiate(datas.GetRandomCustomerPrefab(), entryDoor.position, Quaternion.identity);
             GameObject order = datas.GetRandomOrderPrefab();
             customer.GetComponent<CustomerMovement>().SetTablePos(locationOfTable);
-            customer.GetComponent<CustomerMovement>().SetDoorPos(doorPos.position);
+            customer.GetComponent<CustomerMovement>().SetDoorPos(exitDoor.position);
             customer.GetComponent<Customer>().SetTable(table);
             customer.GetComponent<Customer>().SetOrderPrefab(order);
             customer.GetComponent<Customer>().SetCoin(coinPrefab);

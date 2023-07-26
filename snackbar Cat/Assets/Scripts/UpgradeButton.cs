@@ -6,6 +6,15 @@ using UnityEngine.UI;
 public class UpgradeButton : MonoBehaviour
 {
 
+    Animator animator;
+    const string IDLE = "UpgradeButtonAnimation";
+
+    void Start()
+    {
+        animator = gameObject.GetComponent<Animator>();
+        animator.Play(IDLE);
+    }
+
     private void OnMouseUp() 
     {
         string message = "";

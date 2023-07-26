@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2076301728070637440}
   - component: {fileID: -7812657109201865423}
   - component: {fileID: 4667815432780222555}
+  - component: {fileID: -3159217914936395140}
   m_Layer: 0
   m_Name: upgradeButton
   m_TagString: Untagged
@@ -104,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c86fc013900646bd95ed81877aef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeImageGameObject: {fileID: 0}
 --- !u!61 &-7812657109201865423
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,3 +139,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2428972777814984578}
   m_CullTransparentMesh: 1
+--- !u!95 &-3159217914936395140
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428972777814984578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5dfc053d00e8c2d4cba50ffddd5d7f04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
