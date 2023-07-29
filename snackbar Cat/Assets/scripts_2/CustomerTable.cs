@@ -5,6 +5,7 @@ using UnityEngine;
 public class CustomerTable : MonoBehaviour
 {
 
+    [SerializeField] List<GameObject> orderPrefabs = new List<GameObject>();
     [SerializeField] List<GameObject> customersPrefab = new List<GameObject>();
     [SerializeField] Transform enterDoor;
     [SerializeField] Transform exitDoor;
@@ -36,6 +37,7 @@ public class CustomerTable : MonoBehaviour
         GameObject customer = Instantiate(customersPrefab[Random.Range(0, customersPrefab.Count)], enterDoor.position, Quaternion.identity);
         customer.GetComponent<CustomerMovment_2>().SetTable(this.gameObject);
         customer.GetComponent<CustomerMovment_2>().SetExitDoor(exitDoor);
+        customer.GetComponent<customer_2>().SetOrder(orderPrefabs[Random.Range(0, orderPrefabs.Count)]);
     }
 
     //it's a little bit upper than the table

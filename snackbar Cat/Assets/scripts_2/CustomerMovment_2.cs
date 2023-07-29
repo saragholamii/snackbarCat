@@ -10,6 +10,7 @@ public class CustomerMovment_2 : MonoBehaviour
     private Transform exitDoor;
     private GameObject table;
     private GameObject order;
+    private bool ordered = false;
     
     void Awake()
     {
@@ -26,7 +27,11 @@ public class CustomerMovment_2 : MonoBehaviour
 
     void Update()
     {
-        if(Vector3.Distance(transform.position, table.GetComponent<CustomerTable>().GetCustomerPlace()) <= 1f)        CreateOrder();
+        if(Vector3.Distance(transform.position, table.GetComponent<CustomerTable>().GetCustomerPlace()) <= 1.5f && !ordered)
+        {
+            ordered = true;
+            CreateOrder();
+        }        
     }
 
     private void MoveIn()
@@ -36,7 +41,7 @@ public class CustomerMovment_2 : MonoBehaviour
 
     public void CreateOrder()
     {
-        order = Instantiate(this.gameObject.GetComponent<customer_2>().GetOrder(), transform.GetChild(0).position, Quaternion.identity);
+        order = Instantiate(gameObject.GetComponent<customer_2>().GetOrder(), transform.GetChild(0).position, Quaternion.identity);
     }
 
     public void SetTable(GameObject table)
