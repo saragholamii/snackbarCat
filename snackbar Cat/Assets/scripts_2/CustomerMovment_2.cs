@@ -11,9 +11,19 @@ public class CustomerMovment_2 : MonoBehaviour
     private GameObject table;
     private GameObject order;
     private bool ordered = false;
+    private Animator animator;
+    private string currentState;
+    private Vector3 currentPosition;
+    private Vector3 previousPosition;
+
+     //animation states:
+    const string IDLE = "IDLE";
+    const string DOWN = "Forward";
+    const string UP = "Back";
     
     void Awake()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -22,7 +32,7 @@ public class CustomerMovment_2 : MonoBehaviour
     void Start() 
     {
         MoveIn();
-        Debug.Log("table.GetComponent<CustomerTable>().GetCustomerPlace(): " + table.GetComponent<CustomerTable>().GetCustomerPlace());
+        animator.Play(DOWN);
     }
 
     void Update()
@@ -38,6 +48,15 @@ public class CustomerMovment_2 : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
+        //animation:
+        currentPosition = transform.position;
+        if(Vector3.Distance(currentPosition, previousPosition) <= 0.01f)        ChangeAnimationState(IDLE);
+        else  if(currentPosition.y < previousPosition.y)                        ChangeAnimationState(DOWN);
+        else                                                                    ChangeAnimationState(UP);
+        previousPosition = currentPosition;
+
     }
 
     private void MoveIn()
@@ -48,6 +67,14 @@ public class CustomerMovment_2 : MonoBehaviour
     public void CreateOrder()
     {
         order = Instantiate(gameObject.GetComponent<customer_2>().GetOrder(), transform.GetChild(0).position, Quaternion.identity);
+    }
+
+    private void ChangeAnimationState(string newState)
+    {
+        if(newState == currentState)    return;
+
+        animator.Play(newState);
+        currentState = newState;
     }
 
     public void SetTable(GameObject table)
