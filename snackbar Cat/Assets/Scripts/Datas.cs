@@ -1,6 +1,8 @@
+using System.Xml.Schema;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Datas : MonoBehaviour
 {
@@ -14,9 +16,17 @@ public class Datas : MonoBehaviour
     private static int score = 0;
     private static int price = 1;
     private static int level = 1;
-    private int nextSeller = 0;
 
+    void Awake() 
+    {
 
+        string jason = File.ReadAllText(Application.persistentDataPath + "/savaData.jason");
+        SavaData savaData = JsonUtility.FromJson<SavaData>(jason);
+        score = int.Parse(savaData.score);
+        price = int.Parse(savaData.price);
+        level = int.Parse(savaData.level);
+       
+    }
     public bool IsThereEmptyTable()
     {
         for(int i = 0; i < tables.Length; i++)
@@ -84,7 +94,6 @@ public class Datas : MonoBehaviour
 
     public static int GetPrice()
     {
-        Debug.Log("price: " + price);
         return price;
     }
 

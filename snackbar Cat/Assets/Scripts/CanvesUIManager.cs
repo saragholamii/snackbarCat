@@ -86,4 +86,10 @@ public class CanvesUIManager : MonoBehaviour
     {
         Core.hideHelpUpgradeMessage();
     }
+
+    public void ExitTheGame()
+    {
+        Core.save();
+        Application.Quit();
+    }
 }

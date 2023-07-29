@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class Core : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class Core : MonoBehaviour
     public static Upgrade hideHelpUpgradeMessage;
     public static Upgrade showBabyUpgradeButton;
     public static Upgrade hideBabyUpgradeButton;
+    public delegate void Save();
+    public static Upgrade save;
     
 
     void Start() 
@@ -65,6 +68,7 @@ public class Core : MonoBehaviour
         hideBabyUpgradeButton += Hide_BabyUpgradeButton;
         showHelpUpgradeMessage += Show_HelpUpgradeMessage;
         hideHelpUpgradeMessage += Hide_HelpUpgradeMessage;
+        save += SaveTheGame;
 
         //create seller
         New_Seller(0);
@@ -171,6 +175,13 @@ public class Core : MonoBehaviour
     private void Hide_HelpUpgradeMessage()
     {
         helpMessage.SetActive(false);
+    }
+
+    private void SaveTheGame()
+    {
+        SavaData saveData = new SavaData(Datas.GetScore().ToString(), Datas.GetLevel().ToString(), Datas.GetPrice().ToString());
+        string jason = JsonUtility.ToJson(saveData);
+        File.WriteAllText(Application.persistentDataPath + "/savaData.jason", jason);
     }
 
 }

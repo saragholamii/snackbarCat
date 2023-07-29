@@ -6,7 +6,6 @@ public class Coin : MonoBehaviour
 {
     
     [SerializeField] private int coinDestroyTime = 2;
-    [SerializeField] private int coinValue = 1;
     Animator animator;
     const string IDLE = "coinAnimation";
 

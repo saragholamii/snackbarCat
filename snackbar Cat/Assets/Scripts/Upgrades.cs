@@ -26,7 +26,6 @@ public class Upgrades : MonoBehaviour
 
     private int level = 1;
     private int score = 0;
-    private int sandwitchMakerNum = 1;
     public delegate void CreateCoffeeMaker();
     public static CreateCoffeeMaker createCoffeeMaker;
 
