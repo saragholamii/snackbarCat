@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8303129994927052998}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1999993, y: -1.41, z: -0.015112102}
+  m_LocalPosition: {x: -2.1999993, y: -1.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8303129995347080451}
   - component: {fileID: 8303129995347080450}
+  - component: {fileID: 4888937759718301736}
   m_Layer: 0
   m_Name: customerTable
   m_TagString: Untagged
@@ -164,12 +165,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18083f9ff9e7c6c4d8c7234b81d3bee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderPrefabs: []
   customersPrefab:
   - {fileID: 4562426157207872485, guid: da522eb86b560e6469bcec3039d8b867, type: 3}
   enterDoor: {fileID: 0}
   exitDoor: {fileID: 0}
   customerPlace: {fileID: 8303129994927052999}
   waiterPlace: {fileID: 8303129995881395711}
+--- !u!61 &4888937759718301736
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303129995347080453}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.2166643, y: -3.0600228}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.9675207, y: 1.0159881}
+  m_EdgeRadius: 0
 --- !u!1 &8303129995457854933
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8303129995881395710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.3600001, y: -4.11, z: -0.015112102}
+  m_LocalPosition: {x: -2.3600001, y: -4.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

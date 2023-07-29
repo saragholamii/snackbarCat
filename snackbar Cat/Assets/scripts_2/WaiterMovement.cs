@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WaiterMovement : MonoBehaviour
 {
-    [SerializeField] Vector3 kitchenTablePos;
+    [SerializeField] Transform kitchenTablePos;
     private customer_2 customer;
     private Vector3 customerTablePos;
     private int speed;
@@ -19,7 +19,7 @@ public class WaiterMovement : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.updatePosition = false;
+        agent.updateUpAxis = false;
         agent.updateRotation = false;
     }
 
@@ -34,19 +34,19 @@ public class WaiterMovement : MonoBehaviour
             MoveTo(customerTablePos);
         }
 
-        if(!free && !orderTaken && Vector3.Distance(transform.position, customerTablePos) <= 1f)
+        if(!free && !orderTaken && Vector3.Distance(transform.position, customerTablePos) <= 2f)
         {
             orderTaken = true;
             StartCoroutine(WaitForOrder(customer.GetComponent<customer_2>().GetOrderWaitTime()));
         }
 
-        if(!free && orderTaken && !orderMaked && Vector3.Distance(transform.position, kitchenTablePos) <= 1f)
+        if(!free && orderTaken && !orderMaked && Vector3.Distance(transform.position, kitchenTablePos.position) <= 1f)
         {
             orderMaked = true;
             StartCoroutine(WaitForMakeOrder(customer.GetComponent<customer_2>().GetOrder().GetComponent<Food>().GetWaitTime()));
         }
 
-        if(!free && orderTaken && orderMaked && Vector3.Distance(transform.position, customerTablePos) <= 1f)
+        if(!free && orderTaken && orderMaked && Vector3.Distance(transform.position, customerTablePos) <= 2f)
         {
             DeliverOrder();
         }
@@ -61,7 +61,7 @@ public class WaiterMovement : MonoBehaviour
     private IEnumerator WaitForOrder(float second)
     {
         yield return new WaitForSeconds(second);
-        MoveTo(kitchenTablePos);
+        MoveTo(kitchenTablePos.position);
     }
 
     private IEnumerator WaitForMakeOrder(float second)
@@ -72,9 +72,9 @@ public class WaiterMovement : MonoBehaviour
 
     private void DeliverOrder()
     {
+        customer.GetComponent<CustomerMovment_2>().MoveOut();
         free = true;
         orderMaked = false;
         orderTaken = false;
-        customer.GetComponent<CustomerMovment_2>().MoveOut();
     }
 }

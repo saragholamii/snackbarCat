@@ -21,17 +21,23 @@ public class CustomerMovment_2 : MonoBehaviour
 
     void Start() 
     {
-        CustomerManager.AddCustomer(this.gameObject.GetComponent<customer_2>());
         MoveIn();
+        Debug.Log("table.GetComponent<CustomerTable>().GetCustomerPlace(): " + table.GetComponent<CustomerTable>().GetCustomerPlace());
     }
 
     void Update()
     {
-        if(Vector3.Distance(transform.position, table.GetComponent<CustomerTable>().GetCustomerPlace()) <= 1.5f && !ordered)
+        if(Vector3.Distance(transform.position, table.GetComponent<CustomerTable>().GetCustomerPlace()) <= 2f && !ordered)
         {
             ordered = true;
+            CustomerManager.AddCustomer(this.gameObject.GetComponent<customer_2>());
             CreateOrder();
-        }        
+        }    
+
+        if(Vector3.Distance(transform.position, exitDoor.position) <= 2f)    
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void MoveIn()
@@ -52,6 +58,7 @@ public class CustomerMovment_2 : MonoBehaviour
 
     public void MoveOut()
     {
+        Debug.Log("inside moveout");
         Destroy(order);
         table.GetComponent<CustomerTable>().SetFree();
         agent.SetDestination(exitDoor.position);
