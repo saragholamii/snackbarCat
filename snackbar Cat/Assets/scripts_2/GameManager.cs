@@ -9,27 +9,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject upgradeButton;
-    [SerializeField] private Transform upgradeButtonPos;
     [SerializeField] private GameObject helpBox;
-    [SerializeField] private Transform helpBoxPos;
     [SerializeField] private GameObject upgradeMessage;
     [SerializeField] private TextMeshProUGUI upgradeMessageText;
+    [SerializeField] private GameObject upgradeHelpMessage;
+    [SerializeField] private TextMeshProUGUI upgradeHelpMessageText;
+    [SerializeField] private GameObject helpPrefab;
+    
     private int coins;
     private int level = 1;
     private int price = 1;
 
 
     //upgrade bools:
-    private bool level2 = false;
-    private bool level3 = false;
-    private bool level4 = false;
-    private bool level5 = false;
-    private bool level6 = false;
-    private bool level7 = false;
-    private bool level8 = false;
-    private bool level9 = false;
-    private bool level10 = false;
-    private bool helpLevel = false;
+    private bool level2 = false, level3 = false, level4 = false,level5 = false, level6 = false, 
+    level7 = false, level8 = false, level9 = false, level10 = false, helpLevel = false;
+    
 
     public void onPay()
     {
@@ -100,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void UpgradeHelp()
     {
-        Instantiate(helpBox, helpBoxPos.position, Quaternion.identity);
+        helpBox.SetActive(true);
     }
 
     public void ClickUpgradeButton()
@@ -171,6 +166,39 @@ public class GameManager : MonoBehaviour
         upgradeMessage.SetActive(false);
     }
 
+
+    private void SetScores()
+    {
+        coinText.text = coins.ToString();
+        levelText.text = "level " + level.ToString();
+        priceText.text = "price " + price.ToString();
+    }
+
+    //Upgrade Help Methods: 
+
+    //on click helpBox
+    public void OnClickHelpBox()
+    {
+        upgradeHelpMessageText.text = "a help will join you for 200 coins";
+        upgradeHelpMessage.SetActive(true);
+    }
+
+
+    //on accept help upgrade - call by a button
+    public void OnAcceptHelp()
+    {
+        upgradeHelpMessage.SetActive(false);
+        coins -= 200;
+        Instantiate(helpPrefab, helpBox.transform.position, Quaternion.identity);
+    }
+
+    //on reject help upgrade - call by a button
+    public void OnRejectHelp()
+    {
+        upgradeHelpMessage.SetActive(false);
+    }
+
+
     private void SetMessageText()
     {
         string message = "";
@@ -206,12 +234,5 @@ public class GameManager : MonoBehaviour
         }
 
         upgradeMessageText.text = message;
-    }
-
-    private void SetScores()
-    {
-        coinText.text = coins.ToString();
-        levelText.text = "level " + level.ToString();
-        priceText.text = "price " + price.ToString();
     }
 }
