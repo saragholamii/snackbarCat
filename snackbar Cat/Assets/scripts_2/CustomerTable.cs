@@ -18,7 +18,6 @@ public class CustomerTable : MonoBehaviour
     {
         if(free)
         {
-            Debug.Log("free");
             free = false;
             StartCoroutine(WaitAndCreate(Random.Range(2, 5)));
         }   
@@ -26,14 +25,12 @@ public class CustomerTable : MonoBehaviour
 
     private IEnumerator WaitAndCreate(int second)
     {
-        Debug.Log("second: " + second);
         yield return new WaitForSeconds(second);
         CreateCustomer();
     }
 
     private void CreateCustomer()
     {
-        Debug.Log("inside create customer");
         GameObject customer = Instantiate(customersPrefab[Random.Range(0, customersPrefab.Count)], enterDoor.position, Quaternion.identity);
         customer.GetComponent<CustomerMovment_2>().SetTable(this.gameObject);
         customer.GetComponent<CustomerMovment_2>().SetExitDoor(exitDoor);

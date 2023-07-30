@@ -85,7 +85,6 @@ public class CustomerMovment_2 : MonoBehaviour
 
     public void MoveOut()
     {
-        Debug.Log("inside moveout");
         Destroy(order);
         table.GetComponent<CustomerTable>().SetFree();
         agent.SetDestination(exitDoor.position);

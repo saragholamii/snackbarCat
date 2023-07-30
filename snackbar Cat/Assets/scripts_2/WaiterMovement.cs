@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class WaiterMovement : MonoBehaviour
 {
     [SerializeField] Transform kitchenTablePos;
+    [SerializeField] private UnityEvent pay;
     private customer_2 customer;
     private Vector3 customerTablePos;
     private int speed;
@@ -102,6 +104,7 @@ public class WaiterMovement : MonoBehaviour
     private void DeliverOrder()
     {
         customer.GetComponent<CustomerMovment_2>().MoveOut();
+        pay?.Invoke();
         free = true;
         orderMaked = false;
         orderTaken = false;
