@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class CustomerMovment_2 : MonoBehaviour
 {
 
+    [SerializeField] GameObject coinPrefab;
     private NavMeshAgent agent;
     private Transform exitDoor;
     private GameObject table;
@@ -86,6 +87,7 @@ public class CustomerMovment_2 : MonoBehaviour
     public void MoveOut()
     {
         Destroy(order);
+        Instantiate(coinPrefab, table.transform.GetChild(1).transform.position, Quaternion.identity);
         table.GetComponent<CustomerTable>().SetFree();
         agent.SetDestination(exitDoor.position);
     }
