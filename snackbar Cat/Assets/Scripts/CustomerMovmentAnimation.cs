@@ -12,9 +12,9 @@ public class CustomerMovmentAnimation : MonoBehaviour
 
 
     //animation states:
-    const string IDLE = "Customer1_Idle";
-    const string DOWN = "Customer1_Forward";
-    const string UP = "Customer1_Back";
+    const string IDLE = "IDLE";
+    const string DOWN = "Forward";
+    const string UP = "Back";
 
 
     void Start()

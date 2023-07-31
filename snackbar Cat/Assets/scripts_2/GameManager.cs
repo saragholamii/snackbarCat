@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,23 @@ public class GameManager : MonoBehaviour
     private bool level2 = false, level3 = false, level4 = false,level5 = false, level6 = false, 
     level7 = false, level8 = false, level9 = false, level10 = false, helpLevel = false;
     
+
+    void Awake()
+    {
+        if(File.Exists(Application.persistentDataPath + "/savaData.jason"))
+        {
+            string jason = File.ReadAllText(Application.persistentDataPath + "/savaData.jason");
+            SavaData savaData = JsonUtility.FromJson<SavaData>(jason);
+            coins = int.Parse(savaData.score);
+            price = int.Parse(savaData.price);
+            level = int.Parse(savaData.level);
+        }
+    }
+
+    void Start()
+    {
+        SetScores();
+    }
 
     public void onPay()
     {
@@ -175,7 +193,6 @@ public class GameManager : MonoBehaviour
     }
 
     //Upgrade Help Methods: 
-
     //on click helpBox
     public void OnClickHelpBox()
     {
@@ -234,5 +251,13 @@ public class GameManager : MonoBehaviour
         }
 
         upgradeMessageText.text = message;
+    }
+
+    public void OnQuit()
+    {
+        SavaData saveData = new SavaData(coins.ToString(), level.ToString(), price.ToString());
+        string jason = JsonUtility.ToJson(saveData);
+        File.WriteAllText(Application.persistentDataPath + "/savaData.jason", jason);
+        Application.Quit();
     }
 }

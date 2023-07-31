@@ -13,9 +13,9 @@ public class SellerMovmentAnimation : MonoBehaviour
 
 
     //animation states:
-    const string IDLE = "Seller_Idle";
-    const string UP = "Seller_RunBackward";
-    const string DOWN = "Seller_RunForward";
+    const string IDLE = "IDLE";
+    const string UP = "Back";
+    const string DOWN = "Forward";
     const string LEFT = "Seller_RunLeft";
     const string RIGHT = "Seller_RunRight";
 
