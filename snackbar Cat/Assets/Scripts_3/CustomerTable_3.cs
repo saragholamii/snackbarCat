@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class CustomerTable_3 : MonoBehaviour
@@ -11,17 +12,25 @@ public class CustomerTable_3 : MonoBehaviour
     [SerializeField] private List<customerInfo_3> customers = new List<customerInfo_3>();
     [SerializeField] private Transform enterDoor;
     [SerializeField] private Transform exitDoor;
-    [SerializeField] private int minWaitTime;
-    [SerializeField] private int maxWaitTime;
+    [SerializeField] private int minWaitTimeToCreateNextCustomer;
+    [SerializeField] private int maxWaitTimeToCreateNextCustomer;
     [SerializeField] private Transform waiterPlace;
+    [SerializeField] private UnityEvent<int> payForFood;
 
     void Update()
     {
         if (free)
         {
             free = false;
-            WaitAndCreateCustomer(Random.Range(minWaitTime, maxWaitTime));
+            StartCoroutine(WaitAndCreateCustomer(Random.Range(minWaitTimeToCreateNextCustomer,
+                maxWaitTimeToCreateNextCustomer)));
         }
+    }
+    
+    private IEnumerator WaitAndCreateCustomer(int time)
+    {
+        yield return new WaitForSeconds(time);
+        CreateCustomer();
     }
 
     //this method will create a customer and an order and set the order for the customer
@@ -31,22 +40,31 @@ public class CustomerTable_3 : MonoBehaviour
         GameObject customer = Instantiate(customers[customerIndex].customerPrefab, enterDoor.position, Quaternion.identity);
         customer.GetComponent<customer_3>().SetTakeOrderTime(customers[customerIndex].customerTakeOrderTime);
         customer.GetComponent<customer_3>().SetTable(gameObject);
-        customer.GetComponent<CustomerMovement_3>().SetTablePos(customers[customerIndex].tablePos);
+        customer.GetComponent<CustomerMovement_3>().SetTablePos(this.gameObject.transform);
 
         int orderIndex = Random.Range(0, orders.Count);
         Order_3 order = new Order_3(orders[orderIndex].orderPref, orders[orderIndex].index, orders[orderIndex].price, orders[orderIndex].waitTime, orders[orderIndex].table);
         customer.GetComponent<customer_3>().SetOrder(order);
     }
 
-    private IEnumerator WaitAndCreateCustomer(int time)
+    public void SetFree()
     {
-        yield return new WaitForSeconds(time);
-        CreateCustomer();
+        free = true;
+    }
+
+    public Transform GetExitDoor()
+    {
+        return exitDoor;
     }
 
     public Transform GetWaiterPlace()
     {
         return waiterPlace;
+    }
+
+    public void Pay(int foodCost)
+    {
+        payForFood.Invoke(foodCost);
     }
 }
 
@@ -70,5 +88,4 @@ public class customerInfo_3
 {
     [SerializeField] public GameObject customerPrefab;
     [SerializeField] public int customerTakeOrderTime;
-    [SerializeField] public Transform tablePos;
 }

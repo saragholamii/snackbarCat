@@ -6,8 +6,6 @@ public class FoodTable : MonoBehaviour
 {
     [SerializeField] private int priceFactor;
     [SerializeField] private int waitTimeFactor;
-    [SerializeField] private Transform waiterPlace;
-
 
     private void Upgrade(int priceFactor, int waitTimeFactor)
     {
@@ -27,6 +25,6 @@ public class FoodTable : MonoBehaviour
 
     public Transform GetWaiterPlace()
     {
-        return waiterPlace;
+        return transform;
     }
 }
