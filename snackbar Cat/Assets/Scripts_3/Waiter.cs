@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Waiter : MonoBehaviour
 {
     [SerializeField] private int speed;
-    [SerializeField] private int speedFactor;
+    [SerializeField] private float speedFactor;
     private GameObject customer;
     private bool free = true;
     private bool TakingOrder = false;
@@ -33,6 +33,7 @@ public class Waiter : MonoBehaviour
 
     void Start()
     {
+        GameManager_3.instance.increaseWaiterSpeed.AddListener(UpdateSpeed);
         animator = GetComponent<Animator>();
         animator.Play(IDLE);
     }
@@ -98,7 +99,7 @@ public class Waiter : MonoBehaviour
         currentState = newState;
     }
 
-    private void UpgradeSpeedFactor(int speedFactor)
+    private void UpdateSpeed(float speedFactor)
     {
         this.speedFactor = speedFactor;
         agent.speed = speed * speedFactor;
