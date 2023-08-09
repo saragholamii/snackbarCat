@@ -31,11 +31,11 @@ public class Order_3
 
     public float GetWaitTime()
     {
-        return waitTime;
+        return waitTime - foodTable.GetComponent<FoodTable>().GetWaitTimeFactor();
     }
 
     public int GetFoodCost()
     {
-        return foodCost;
+        return foodCost + foodTable.GetComponent<FoodTable>().GetFoodCostIncreasment();
     }
 }

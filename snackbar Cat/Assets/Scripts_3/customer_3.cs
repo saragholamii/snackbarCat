@@ -11,11 +11,7 @@ public class customer_3 : MonoBehaviour
     [SerializeField] private float takeOrderTimeFactor;
     [SerializeField] private Order_3 order;
     private GameObject customerTable;
-
-    private void UpgradeWaitTimeFactor(float waitTimeFactor)
-    {
-        this.takeOrderTimeFactor = takeOrderTimeFactor;
-    }
+    
 
     public void FreeCustomerTable()
     {
@@ -24,7 +20,7 @@ public class customer_3 : MonoBehaviour
 
     public void Pay()
     {
-        customerTable.GetComponent<CustomerTable_3>().Pay(order.GetFoodCost());
+        GameManager_3.instance.OnPay(order.GetFoodCost());
     }
 
     public void SetTakeOrderTime(int takeOrderTime)

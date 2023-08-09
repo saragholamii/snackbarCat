@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upgradeHelpMessageText;
     [SerializeField] private GameObject helpPrefab;
 
-
+    public static GameManager instance;
     [SerializeField] private List<LevelInfo> upgradePrices;
     [SerializeField] private List<AssistantInfo> assistantInfos;
 
@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        instance = this;
         SetScores();
     }
 

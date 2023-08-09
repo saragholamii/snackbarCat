@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class CustomerTable_3 : MonoBehaviour
 {
     private bool free = true;
+    
     [SerializeField] private List<OrderInfo_3> orders = new List<OrderInfo_3>();
     [SerializeField] private List<customerInfo_3> customers = new List<customerInfo_3>();
     [SerializeField] private Transform enterDoor;
@@ -15,7 +16,6 @@ public class CustomerTable_3 : MonoBehaviour
     [SerializeField] private int minWaitTimeToCreateNextCustomer;
     [SerializeField] private int maxWaitTimeToCreateNextCustomer;
     [SerializeField] private Transform waiterPlace;
-    [SerializeField] private UnityEvent<int> payForFood;
 
     void Update()
     {
@@ -61,11 +61,6 @@ public class CustomerTable_3 : MonoBehaviour
     {
         return waiterPlace;
     }
-
-    public void Pay(int foodCost)
-    {
-        payForFood.Invoke(foodCost);
-    }
 }
 
 
@@ -89,3 +84,5 @@ public class customerInfo_3
     [SerializeField] public GameObject customerPrefab;
     [SerializeField] public int customerTakeOrderTime;
 }
+
+
