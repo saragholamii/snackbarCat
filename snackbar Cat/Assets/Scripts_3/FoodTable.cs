@@ -18,7 +18,7 @@ public class FoodTable : MonoBehaviour
     {
         get
         { 
-            if (level >= upgradeConditions.Count) return new UpgradeInfo_3(int.MaxValue, 100);
+            if (level > upgradeConditions.Count) return new UpgradeInfo_3(int.MaxValue, 100);
             return upgradeConditions[level - 1];
         }
     }
@@ -47,8 +47,7 @@ public class FoodTable : MonoBehaviour
     //this method will call on any coin change, to check the upgrade conditions
     public void CheckUpgrade(int coins)
     {
-        Debug.Log("inside food table, coins: " + coins);
-        if (coins >= currentUpgradeInfo.cost) UpgradeAvailabe();
+        if (coins >= currentUpgradeInfo.cost && level < upgradeConditions.Count) UpgradeAvailabe();
         else UpgradeNotAvailable();
     }
 

@@ -9,7 +9,7 @@ public class GameManager_3 : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private int coins;
-    [SerializeField] public UnityEvent<int> checkUpgrade;
+    [HideInInspector] public UnityEvent<int> checkUpgrade;
     public static GameManager_3 instance;
     private void Start()
     {
