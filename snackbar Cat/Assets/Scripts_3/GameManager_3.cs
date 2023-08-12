@@ -27,6 +27,8 @@ public class GameManager_3 : MonoBehaviour
     public void OnClickGeneralUpgradeButton()
     {
         //the game should stop, a page should appear to show the upgrade options
+        Time.timeScale = 0f;
+        
     }
 
     public void OnBuyWaiterSpeed(float factor)
@@ -44,3 +46,6 @@ public class GameManager_3 : MonoBehaviour
     
     
 }
+
+
+
