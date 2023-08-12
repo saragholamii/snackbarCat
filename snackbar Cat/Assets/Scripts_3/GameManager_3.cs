@@ -12,7 +12,7 @@ public class GameManager_3 : MonoBehaviour
     [SerializeField] private int coins;
     [HideInInspector] public UnityEvent<int> checkUpgrade;
     [SerializeField] public UnityEvent<float> increaseWaiterSpeed;
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }

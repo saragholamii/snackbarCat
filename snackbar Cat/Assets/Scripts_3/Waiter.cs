@@ -29,12 +29,12 @@ public class Waiter : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateUpAxis = false;
         agent.updateRotation = false;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
     {
         GameManager_3.instance.increaseWaiterSpeed.AddListener(UpdateSpeed);
-        animator = GetComponent<Animator>();
         animator.Play(IDLE);
     }
     void Update()
