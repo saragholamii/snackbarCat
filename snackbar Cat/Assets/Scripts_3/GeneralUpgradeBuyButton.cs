@@ -7,13 +7,6 @@ using UnityEngine.UI;
 public class GeneralUpgradeBuyButton : MonoBehaviour
 {
     [SerializeField] private int cost;
-    private Button thisButton;
-
-    private void Start()
-    {
-        thisButton = GetComponent<Button>();
-        GameManager_3.instance.checkUpgrade.AddListener(CheckUpgrade);
-    }
 
     public void SetCost(int cost)
     {
@@ -31,7 +24,7 @@ public class GeneralUpgradeBuyButton : MonoBehaviour
         Color currentColor = gameObject.GetComponent<Image>().color;
         currentColor.a = 1f;
         gameObject.GetComponent<Image>().color = currentColor;
-        thisButton.interactable = true;
+        gameObject.GetComponent<Button>().interactable = true;
     }
 
     public void UpgradeUnAvailable()
@@ -39,7 +32,7 @@ public class GeneralUpgradeBuyButton : MonoBehaviour
         Color currentColor = gameObject.GetComponent<Image>().color;
         currentColor.a = 0.5f;
         gameObject.GetComponent<Image>().color = currentColor;
-        thisButton.interactable = true;
+        gameObject.GetComponent<Button>().interactable = false;
     }
     
     
